@@ -24,7 +24,7 @@ window.SCMRS_CONFIG = {
    *  - Keep false in production. When false the demo button is not shown, demo.js does nothing,
    *    and any leftover demo session is discarded on the next page load.
    *  - Even when true it only works on the hosts listed below (set to null to allow any host). */
-  DEMO_MODE: false,
+  DEMO_MODE: true,
   DEMO_ALLOWED_HOSTS: ["localhost", "127.0.0.1", ""],   // "" = opened from a file (file://)
 
   /* How often (ms) the browser asks the backend for new notifications. */
