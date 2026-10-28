@@ -12,13 +12,13 @@ SCMRS.page(() => {
   const eye = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 
   function row(c) {
-    return `<tr>
-      <td><strong>${ui.esc(ui.refOf(c))}</strong></td>
-      <td>${ui.esc(c.title)}</td>
-      <td>${ui.esc(c.location)}</td>
-      <td>${ui.badge(c.status)}</td>
-      <td>${ui.esc(ui.fmtDate(c.created_at))}</td>
-      <td><a class="view-btn" href="${config.ROUTES.student.complaintLink(c.id)}" aria-label="View ${ui.esc(ui.refOf(c))}">${eye}</a></td>
+    return `<tr class="row-link">
+      <td data-label="ID"><a href="${config.ROUTES.student.complaintLink(c.id)}"><strong>${ui.esc(ui.refOf(c))}</strong></a></td>
+      <td data-label="Problem">${ui.esc(c.title)}</td>
+      <td data-label="Location">${ui.esc(c.location)}</td>
+      <td data-label="Status">${ui.badge(c.status)}</td>
+      <td data-label="Date">${ui.esc(ui.fmtDate(c.created_at))}</td>
+      <td data-label="View"><a class="view-btn" href="${config.ROUTES.student.complaintLink(c.id)}" aria-label="View ${ui.esc(ui.refOf(c))}">${eye}</a></td>
     </tr>`;
   }
 
@@ -37,6 +37,14 @@ SCMRS.page(() => {
       tableWrap.hidden = false; empty.hidden = true; pager.hidden = true;
       ui.tableMessage(tbody, 6, err.message, load);
     }
+  }
+
+  // a stat card on the dashboard links here with ?status=Pending etc.
+  const wanted = ui.param("status");
+  const wantedTab = wanted && $$(".tab").find(t => t.dataset.status.toLowerCase() === wanted.toLowerCase());
+  if (wantedTab) {
+    $$(".tab").forEach(t => t.classList.toggle("active", t === wantedTab));
+    state.status = wantedTab.dataset.status;
   }
 
   $$(".tab").forEach(tab => tab.addEventListener("click", () => {

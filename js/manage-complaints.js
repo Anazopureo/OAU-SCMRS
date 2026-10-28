@@ -22,15 +22,20 @@ SCMRS.page(() => {
 
   config.STATUSES.forEach(s => { filter.add(new Option(s.value, s.value)); statusSel.add(new Option(s.value, s.value)); });
 
+  // a stat card on the dashboard links here with ?status=Pending etc.
+  const wanted = ui.param("status");
+  const wantedStatus = wanted && config.STATUSES.find(s => s.value.toLowerCase() === wanted.toLowerCase());
+  if (wantedStatus) { filter.value = wantedStatus.value; state.status = wantedStatus.value; }
+
   function row(c) {
     if (c.assigned_to) knownAssignees.add(c.assigned_to);
     return `<tr>
-      <td><strong>${ui.esc(ui.refOf(c))}</strong></td>
-      <td>${ui.esc(c.title)}</td>
-      <td>${ui.esc(c.location)}</td>
-      <td>${ui.badge(c.status)}</td>
-      <td>${c.assigned_to ? ui.esc(c.assigned_to) : '<span class="muted">Unassigned</span>'}</td>
-      <td><button type="button" class="btn-small" data-open="${ui.esc(c.id)}">Update</button></td>
+      <td data-label="ID"><strong>${ui.esc(ui.refOf(c))}</strong></td>
+      <td data-label="Problem">${ui.esc(c.title)}</td>
+      <td data-label="Location">${ui.esc(c.location)}</td>
+      <td data-label="Status">${ui.badge(c.status)}</td>
+      <td data-label="Assigned to">${c.assigned_to ? ui.esc(c.assigned_to) : '<span class="muted">Unassigned</span>'}</td>
+      <td data-label="Action"><button type="button" class="btn-small" data-open="${ui.esc(c.id)}">Update</button></td>
     </tr>`;
   }
 
