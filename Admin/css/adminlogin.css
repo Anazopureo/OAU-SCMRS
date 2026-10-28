@@ -7,10 +7,9 @@
 
 
 .container{
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     min-height: 100vh;
     border-radius: 15px;
 }
@@ -20,6 +19,7 @@
     background: #1A56C8;
     text-align: center;
     border-radius: 15px;
+    height: 450px;
 }
 
 .login-card{
@@ -27,7 +27,7 @@
     width: 430px;
     background: #ffff;
     padding: 10px 20px;
-    min-height: 450px;
+    height: 450px;
 }
 
 .login-card h1{
@@ -46,7 +46,7 @@
     margin: 20px 0;
 }
 
-.input-box input[type=text], input[type=password], input[type=email]{
+.input-box input[type=text], input[type=password]{
     width: 100%;
     height: 100%;
     border: none;
@@ -60,25 +60,14 @@
     color: black;
 }
 
-.input-box .material-icons{
+.input-box span{
     position: absolute;
     right: 30px;
     transform: translateY(25%);
 }
 
-button.pw-eye{
-    background: none;
-    border: 0;
-    padding: 0;
-    color: inherit;
-    font-size: 24px;
-    line-height: 1;
+#visible:hover{
     cursor: pointer;
-}
-
-button.pw-eye:focus-visible{
-    outline: 3px solid #F2B632;
-    border-radius: 4px;
 }
 
 .error-msg {
@@ -132,74 +121,4 @@ button.pw-eye:focus-visible{
 
 .home a:hover{
     text-decoration: underline;
-}
-
-.error-msg.ok {
-    color: #17803D;
-}
-
-.login:disabled, .register:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-.login, .register {
-    cursor: pointer;
-}
-
-@media (max-width: 640px) {
-    .container {
-        grid-auto-flow: row;
-        align-content: start;
-        justify-content: stretch;
-    }
-    .info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px;
-        border-radius: 0;
-    }
-    .info h2 { font-size: 1.1rem; }
-    .login-card, .signup-card {
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-        padding: 10px 20px 30px;
-    }
-}
-
-/* Demo login (button is added by js/demo.js only while demo mode is on) */
-.demo-box {
-    margin: 4px 0 14px;
-    padding-top: 14px;
-    border-top: 1px dashed #b9c6e4;
-    text-align: center;
-}
-
-.demo-box p {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.demo-box small {
-    display: block;
-    margin-top: 6px;
-    color: #5a6a8a;
-}
-
-.demo-btn {
-    width: 100%;
-    height: 40px;
-    border: 2px solid #1A56C8;
-    border-radius: 15px;
-    background: #fff;
-    color: #1A56C8;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.demo-btn:hover {
-    background: #eef3fd;
 }

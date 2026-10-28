@@ -6,10 +6,9 @@
 }
 
 .container{
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     min-height: 100vh;
     border-radius: 15px;
 }
@@ -19,6 +18,7 @@
     background: #1A56C8;
     text-align: center;
     border-radius: 15px;
+    height: 450px;
 }
 
 .signup-card{
@@ -26,7 +26,7 @@
     width: 430px;
     background: #ffff;
     padding: 10px 20px;
-    min-height: 450px;
+    height: 450px;
 }
 
 .signup-card h1{
@@ -59,25 +59,14 @@
     color: black;
 }
 
-.input-box .material-icons{
+.input-box span{
     position: absolute;
     right: 30px;
     transform: translateY(25%);
 }
 
-button.pw-eye{
-    background: none;
-    border: 0;
-    padding: 0;
-    color: inherit;
-    font-size: 24px;
-    line-height: 1;
+.visible:hover{
     cursor: pointer;
-}
-
-button.pw-eye:focus-visible{
-    outline: 3px solid #F2B632;
-    border-radius: 4px;
 }
 
 .register{
@@ -121,51 +110,4 @@ button.pw-eye:focus-visible{
 
 .home a:hover{
     text-decoration: underline;
-}
-
-.error-msg {
-    color: #d93025;
-    font-size: 14px;
-    margin: 8px 0;
-    min-height: 18px;
-}
-
-.input-box input.invalid {
-    border: 2px solid #d93025;
-}
-
-.error-msg.ok {
-    color: #17803D;
-}
-
-.login:disabled, .register:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-.login, .register {
-    cursor: pointer;
-}
-
-@media (max-width: 640px) {
-    .container {
-        grid-auto-flow: row;
-        align-content: start;
-        justify-content: stretch;
-    }
-    .info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px;
-        border-radius: 0;
-    }
-    .info h2 { font-size: 1.1rem; }
-    .login-card, .signup-card {
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-        padding: 10px 20px 30px;
-    }
 }

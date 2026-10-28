@@ -61,6 +61,24 @@ SCMRS.page(() => {
   ["dragleave", "drop"].forEach(t => dropzone.addEventListener(t, e => { e.preventDefault(); dropzone.classList.remove("over"); }));
   dropzone.addEventListener("drop", e => addFiles(e.dataTransfer.files));
 
+  /* ---------- inline field errors ---------- */
+  const FIELDS = ["title", "category", "location", "description"];
+  const fieldError = (id, text) => { ui.say($("#" + id + "-error"), text); ui.invalid($("#" + id), !!text); };
+  FIELDS.forEach(id => {
+    const el = $("#" + id);
+    el.addEventListener("input", () => fieldError(id, ""));
+    el.addEventListener("change", () => fieldError(id, ""));
+  });
+
+  const descEl = $("#description");
+  const descCount = $("#desc-count");
+  const drawCount = () => {
+    const n = descEl.value.trim().length;
+    descCount.textContent = n < 10 ? `${n} of 10 characters minimum` : `${n} characters`;
+  };
+  descEl.addEventListener("input", drawCount);
+  drawCount();
+
   /* ---------- submit ---------- */
   form.addEventListener("submit", async e => {
     e.preventDefault();
@@ -75,7 +93,8 @@ SCMRS.page(() => {
       !v.category ? ["#category", "Choose a category."] :
       !v.location ? ["#location", "Tell us where the problem is."] :
       v.description.length < 10 ? ["#description", "Describe the problem in a little more detail (at least 10 characters)."] : null;
-    if (problem) { ui.say(errorEl, problem[1]); $(problem[0]).focus(); return; }
+    FIELDS.forEach(id => fieldError(id, ""));
+    if (problem) { fieldError(problem[0].slice(1), problem[1]); $(problem[0]).focus(); return; }
 
     const data = new FormData();
     Object.entries(v).forEach(([k, val]) => data.append(k, val));
